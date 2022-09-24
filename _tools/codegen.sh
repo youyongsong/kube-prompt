@@ -20,8 +20,13 @@ subcmds=(
     "delete"
     "edit"
     "apply"
+    "set env"
+    "set image"
+    "set resources"
+    "set selector"
+    "set serviceaccount"
+    "set subject"
     "logs"
-    "rolling-update"
     "scale"
     "attach"
     "exec"
@@ -41,16 +46,19 @@ subcmds=(
     "drain"
     "uncordon"
     "annotate"
-    "convert"
     "top node"
     "top pod"
-    "cluster-info"
+    "cluster-info dump"
     "config get-contexts"
     "config set"
     "config set-cluster"
     "config set-credentials"
     "config view"
+    "certificate approve"
+    "certificate deny"
+    "diff"
 )
+set -xv
 
 for cmd in "${subcmds[@]}"; do
   camelized=`echo ${cmd} | gsed -r 's/[- ](.)/\U\1\E/g'`

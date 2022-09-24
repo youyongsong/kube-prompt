@@ -34,10 +34,25 @@ func optionCompleter(args []string, long bool) []prompt.Suggest {
 		suggests = editOptions
 	case "apply":
 		suggests = applyOptions
+	case "set":
+		if len(commandArgs) == 2 {
+			switch commandArgs[1] {
+			case "env":
+				suggests = setEnvOptions
+			case "image":
+				suggests = setImageOptions
+			case "resources":
+				suggests = setResourcesOptions
+			case "selector":
+				suggests = setSelectorOptions
+			case "serviceaccount":
+				suggests = setServiceaccountOptions
+			case "subject":
+				suggests = setSubjectOptions
+			}
+		}
 	case "logs":
 		suggests = logsOptions
-	case "rolling-update":
-		suggests = rollingUpdateOptions
 	case "scale", "resize":
 		suggests = scaleOptions
 	case "attach":
@@ -71,8 +86,6 @@ func optionCompleter(args []string, long bool) []prompt.Suggest {
 		}
 	case "label":
 		suggests = labelOptions
-	case "cluster-info":
-		suggests = clusterInfoOptions
 	case "explain":
 		suggests = explainOptions
 	case "cordon":
@@ -83,8 +96,6 @@ func optionCompleter(args []string, long bool) []prompt.Suggest {
 		suggests = uncordonOptions
 	case "annotate":
 		suggests = annotateOptions
-	case "convert":
-		suggests = convertOptions
 	case "top":
 		if len(commandArgs) >= 2 {
 			switch commandArgs[1] {
@@ -109,6 +120,17 @@ func optionCompleter(args []string, long bool) []prompt.Suggest {
 				suggests = configSetOptions
 			}
 		}
+	case "certificate":
+		if len(commandArgs) == 2 {
+			switch commandArgs[1] {
+			case "approve":
+				suggests = certificateApproveOptions
+			case "deny":
+				suggests = certificateDenyOptions
+			}
+		}
+	case "diff":
+		suggests = diffOptions
 	default:
 		suggests = optionHelp
 	}
